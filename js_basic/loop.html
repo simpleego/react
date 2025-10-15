@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let count=0;
+        let weight=70;
+        const min=10;
+        const max=20;
+        let active1;
+
+        while(weight>50){            
+            const active = Math.floor(Math.random()*(max-min)+min)
+            weight -= active;
+
+            console.log(active);
+            console.log("몸무게1 :"+weight)
+
+            let food = Math.floor(Math.random()*10+5);
+            weight += food;
+            
+            count++;
+            console.log("몸무게2 :"+weight)
+            active1 = active;
+        }
+
+        console.log(count+"일만에 다이어트 끝!!"+active1)
+    </script>
+</body>
+</html>

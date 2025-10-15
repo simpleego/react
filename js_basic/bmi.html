@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>BMI 계산기</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    label, input { display: block; margin: 10px 0; }
+    #result { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>BMI 계산기</h2>
+
+  <label for="height">신장 (cm):</label>
+  <input type="number" id="height" placeholder="예: 165">
+
+  <label for="weight">체중 (kg):</label>
+  <input type="number" id="weight" placeholder="예: 70">
+
+  <button onclick="calculateBMI()">계산하기</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateBMI() {
+      const heightCm = parseFloat(document.getElementById('height').value);
+      const weightKg = parseFloat(document.getElementById('weight').value);
+
+      if (!heightCm || !weightKg) {
+        document.getElementById('result').textContent = "신장과 체중을 모두 입력해주세요.";
+        return;
+      }
+
+      const heightM = heightCm / 100;
+      const bmi = (weightKg / (heightM * heightM)).toFixed(1);
+
+      let category = "";
+      if (bmi < 18.5) category = "저체중";
+      else if (bmi < 23) category = "정상";
+      else if (bmi < 25) category = "과체중";
+      else category = "비만";
+
+      document.getElementById('result').textContent = `BMI: ${bmi} (${category})`;
+    }
+  </script>
+</body>
+</html>

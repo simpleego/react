@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        count=0;
+        weight=70;
+        
+        while(weight>50){            
+            active = prompt("운동시간");
+            active = parseInt(active);
+
+            if(isNaN(active)){
+                active = 0;
+            }else {
+                weight -= active;
+            }
+
+            console.log(active);
+            console.log("몸무게 :"+weight)
+
+            food = prompt("식사량");
+            food = parseInt(food);
+
+            if(isNaN(food)){
+                food=0;
+            }else{
+                weight += food;
+            }
+            
+            count++;
+            console.log("몸무게 :"+weight)
+        }
+
+        console.log(count+"일만에 다이어트 끝!!")
+    </script>
+</body>
+</html>
