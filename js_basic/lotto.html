@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또번호 추첨</title>
+    <style>
+        .ball {
+            display: inline-block;
+            border: 1px solid black;
+            border-radius: 20px;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin-right: 20px;
+            background-color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div id="result">
+        추첨결과 : 
+    </div>
+    <div id="bonus">
+        보너스 : 
+    </div>    
+</body>
+<script>
+    const candidate = Array(45).fill().map((v,i)=>i+1);
+    console.log('-->'+candidate[44])
+    const shuffle = [];
+
+    // 로또번호 섞기
+    while(candidate.length > 0){
+        const random=Math.floor(Math.random()*candidate.length) // 무작위 인덱트 뽑기
+        const spliceArray = candidate.splice(random,1) // 뽑은 값은 배열에 들어 있음
+        console.log("뽑은 공 :"+spliceArray);
+        const value = spliceArray[0];
+        shuffle.push(value); // shuffle 배열에 넣기
+    }
+
+    // 6개 로또번호 뽑기
+    console.log(shuffle)
+    const winBalls = shuffle.slice(0,6).sort((a,b)=>a-b);
+    console.log("==>"+winBalls);
+    const bonus = shuffle[6];
+
+    // 태그 생성하고 로또번호 출력 준비
+    const $result = document.querySelector('#result');
+    const $bonus = document.querySelector('#bonus');
+
+    const drawBall = (number, $parent)=>{
+        const $ball = document.createElement('div');
+        $ball.className = 'ball';
+        $ball.style.background = 'green';
+        $ball.textContent = number;
+        $parent.appendChild($ball);
+    };
+
+    // 6번 반복해서 로또번호를 화면에 출력
+    // 1초간격을 유지하면서...
+    for(let i=0; i<winBalls.length; i++){
+        setTimeout(()=>{
+            // 1초후에 해야할 일을 기술
+            drawBall(winBalls[i], $result)            
+        },1000*(i+1));
+    }
+
+    // 보너스 출력 ?
+    setTimeout(()=>{
+            // 1초후에 해야할 일을 기술
+            drawBall(bonus, $bonus)            
+    },7000);
+
+</script>
+</html>
