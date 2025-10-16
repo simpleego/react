@@ -16,6 +16,7 @@
             text-align: center;
             margin-right: 20px;
             background-color: #f00;
+            color: white;
         }
     </style>
 </head>
@@ -54,7 +55,17 @@
     const drawBall = (number, $parent)=>{
         const $ball = document.createElement('div');
         $ball.className = 'ball';
-        //$ball.style.background = 'green';
+        if(number < 10){
+            $ball.style.background = 'red';
+        }else if(number < 20){
+            $ball.style.background = 'orange';
+        }else if(number < 30){
+            $ball.style.background = 'yellow';
+        }else if(number < 40){
+            $ball.style.background = 'blue';
+        }else{
+            $ball.style.background = 'green';
+        }
         $ball.textContent = number;
         $parent.appendChild($ball);
     };
