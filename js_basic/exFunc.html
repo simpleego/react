@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 일반적인 함수
+        // 입력(데이터)->처리-출력
+        // 고차함수
+        // 입력(함수)->함수
+        const func = (msg)=>()=> {
+               console.log(msg);
+        };
+
+        console.log('함수 :'+func()); 
+        const innerFunc = func('Hello');  
+        const innerFunc1 = func('java');  
+        const innerFunc2 = func('python');  
+        const innerFunc3 = func();  
+        innerFunc1(); 
+        innerFunc2(); 
+        innerFunc3(); 
+        innerFunc(); 
+
+    </script>
+</body>
+</html>
