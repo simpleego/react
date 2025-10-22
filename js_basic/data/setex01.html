@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+        // textContent
+    </div>
+    <script>
+        // set(집합) : 중복된 데이터를 갖지 않는다.
+        const letters = new Set(["a","b","c"]);
+        const out = document.querySelector("#demo");
+        let text="";
+
+        // 집합의 원소 확인
+        console.log("==>"+letters.has("c"));
+
+        // letters.forEach(function(value){
+        //     text += value;
+        // });
+        for(const x of letters){
+            text += x;
+        }
+
+        // instance of 객체 존재여부 확인
+        // 객체의 실체가 있는가?
+        console.log(letters instanceof Set);        
+
+
+        console.log(text);
+        outLine = "<p>집합의 원소는 "+text+"</p>";
+        console.log(outLine);
+        
+        out.innerHTML = outLine;// "<p>집합의 원소는 "+text+"</p>";
+
+        letters.add("d");
+        letters.add("d");
+        // letters[0] = "f";
+
+        list1 = ["a","b","c","d","d"];
+        listText="";
+        list1.forEach(function(val){
+            listText += val;
+        });
+        
+        console.log("list :"+listText);
+
+        letters.forEach(function(value){
+            text += value;
+        });
+        console.log("-->"+text);
+        console.log("-->"+typeof letters);
+        outLine += "<p>집합의 원소는 "+"<strong>"+text+"</strong></p>"
+
+        out.innerHTML = outLine; // "<p>집합의 원소는 "+"<strong>"+text+"</strong></p>";
+
+
+
+    </script>
+</body>
+</html>

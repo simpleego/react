@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Scope</h2>
+
+<p>A GLOBAL variable can be accessed from any script or function.</p>
+
+<p id="demo"></p>
+
+<button onclick="contentAppend()">내용추가</button>
+<button onclick="contentDelete()">내용삭제</button>
+
+<script>
+let carName = "Volvo";// 전역변수 : 프로그램 전체에서 사용 가능
+//myFunction();
+let element = document.getElementById("demo");
+
+function myFunction() {
+  element.innerHTML = "I can display " + carName;
+}
+
+function contentAppend(){
+    // ???
+    let text = "I can display " + carName;
+    for(let i=0; i<3; i++){
+        element.innerHTML += text + i;
+    }
+    //console.log(i);
+}
+
+function contentDelete(){
+    //? 
+    element.innerHTML = "";
+}
+</script>
+
+</body>
+</html>
+
+

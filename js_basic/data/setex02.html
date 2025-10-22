@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+        // textContent
+    </div>
+    <script>
+        // set(집합) : 중복된 데이터를 갖지 않는다.
+        const letters1 = new Set(["a","b","c"]);
+        const letters2 = new Set(["b","c","d"]);
+        const out = document.querySelector("#demo");
+        let text="";
+
+        //const C = letters1.intersection(letters2);
+        const C = letters1.difference(letters2);
+        //console.log("교집합 :" + C);
+        console.log("차집합(순수한 A) :" + C);
+
+        for(const x of C){
+            text += x;
+        }
+
+        out.textContent = "차집함 : "+text;
+        //out.textContent = "교집합 : "+text;
+        
+
+    </script>
+</body>
+</html>

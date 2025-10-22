@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Creating JavaScript Objects</h1>
+<h2>Using an Object Literal</h2>
+
+<p id="demo"></p>
+
+<script>
+// Create an Object:
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+};
+
+// Create new Object
+const man = Object.create(person);
+// man.firstName = "Peter";
+// document.getElementById("demo").innerHTML =
+// man.firstName + " is " + man.age + " years old.";
+
+
+const student = person;  // 객체 공유하기(객체의 주소가 같다.)
+student.firstName = "홍길동";
+document.getElementById("demo").innerHTML =
+person.firstName + " is " + student.age + " years old.";
+
+//
+// Display Data from the Object:
+//document.getElementById("demo").innerHTML =
+//person.firstName + " is " + person.age + " years old.";
+
+const fruits = [
+  ["apples", 300],
+  ["pears", 900],
+  ["bananas", 500]
+];
+
+const myObj = Object.fromEntries(fruits);
+document.getElementById("demo").innerHTML = myObj.pears;
+
+console.log(fruits[1][1]);
+console.log(myObj.pears);
+</script>
+
+</body>
+</html>

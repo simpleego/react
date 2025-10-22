@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript Loops</h1>
+<h2>The for Loop</h2>
+
+<p id="demo"></p>
+
+<script>
+const person = {fname:"John", lname:"Doe", age:25}; 
+
+let txt = "";
+let key = "fname";
+txt = person[key];
+for (let x in person) {
+  txt += person[x] + " ";
+}
+
+document.getElementById("demo").innerHTML = txt;
+
+
+// Create a String
+const name = ["W3Schools","java","js","python",200,100];
+// Iterate over the string elements
+let text = ""
+for (const x of name) {
+  text += x + " ";
+}
+
+for (let i=0; i<name.length; i++) {
+  text += name[i] + " ";
+}
+
+document.getElementById("demo").innerHTML = text;
+</script>
+
+</body>
+</html>

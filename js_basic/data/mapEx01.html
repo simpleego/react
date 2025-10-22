@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <!-- // 데이터 출력 영역 -->
+         <p id="result"></p>
+    </div>
+    <script>
+        // Map : 키와 값으로 데이터를 표현
+
+        const fruits = new Map([
+            ["apples", 500],
+            ["바나나", 200],
+            ["오렌지", 300],
+        ]);
+
+        let numOfApple = fruits.get("apples");
+        document.querySelector("#result").innerText
+        = "사과의 수 :"+numOfApple;
+
+        // 값의 수정
+        fruits.set("apples",499);
+        numOfApple = fruits.get("apples");
+
+        document.querySelector("#result").innerText
+        = "사과의 수 :"+numOfApple;
+
+        // 값의 추가
+        fruits.set("딸기",100);
+        numOfApple = fruits.get("딸기");
+        console.log(numOfApple);
+        console.log(fruits.has("딸기"));
+
+        fruits.set("딸기",300);
+
+        fruits.delete("딸기");
+        console.log(fruits.has("딸기"));
+
+
+
+
+
+
+    </script>
+</body>
+</html>
