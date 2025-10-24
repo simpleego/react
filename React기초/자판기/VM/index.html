@@ -112,7 +112,8 @@
     const coin50 = document.querySelector("#coin50");
     const coin100 = document.querySelector("#coin100");
     const coin500 = document.querySelector("#coin500");
-    console.log(coin500.innerHTML);
+
+    const $vmMoney = document.querySelector("#vmMoney");
 
     coin50.addEventListener("click",coinProc);
     coin100.addEventListener("click",coinProc);
@@ -132,21 +133,33 @@
 
     function milkProc(event){
         let product = event.target.innerHTML;
-        console.log(product);
         let price=0;
         price = coffeePrice[product];
         vmMoney += price;
 
         console.log("판매금액 :" +vmMoney);
         coffeeOut.innerHTML = `<p><b> ${milkPrice} ${pMilk} 나왔습니다.</b></p>`;
+        $vmMoney.innerHTML = vmMoney;
     }
 
     function creamProc(event){
+        let product = event.target.innerHTML;
+        let price=0;
+        price = coffeePrice[product];
+        vmMoney += price;
+
         coffeeOut.innerHTML = `<p><b> ${creamPrice} ${pCream} 나왔습니다.</b></p>`;
+        $vmMoney.innerHTML = vmMoney;
     }
 
     function blackProc(event){
+        let product = event.target.innerHTML;
+        let price=0;
+        price = coffeePrice[product];
+        vmMoney += price;
+
         coffeeOut.innerHTML = `<p><b> ${blackPrice} ${pBlack} 나왔습니다.</b></p>`;
+        $vmMoney.innerHTML = vmMoney;
     }
 
 </script>
