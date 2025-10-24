@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커피 자판기</title>
+    <style>
+        #container {
+            width: 600px;
+            margin: 50px auto;
+            border: 10px solid #eee;
+            padding: 1em;
+        }
+
+        .products {
+            width: 100px;
+            height: 150px;
+            border: 1px solid #953939;
+            background-color: #f5dede;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        #coffeeOut {
+            width: 100px;
+            height: 120px;
+            margin: 30px auto;
+            border: 10px solid #953939;
+            background-color: #56535370;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .products {
+            display: inline-block;
+            margin-right: 2em;
+        }
+
+        #inMoney {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- 커피 상품 나열 -->
+        <div>
+            <ul>
+                <li class="products">
+                    <p id="pMilk">밀크커피</p>
+                    <p>가격:<span id="milkPrice">300</span>원</p>
+                    <button id="milk">밀크커피</button>
+                </li>
+                <li class="products">
+                    <p id="pCream">프림커피</p>
+                    <p>가격:<span id="creamPrice">300</span>원</p>
+                    <button id="cream">프림커피</button>
+                </li>
+                <li class="products">
+                    <p id="pBlack">블랙커피</p>
+                    <p>가격:<span id="blackPrice">200</span>원</p>
+                    <button id="black">블랙커피</button>
+                </li>
+            </ul>
+        </div>
+        <!-- 커피 제어판  -->
+        <div>
+            <button id="coin50">50원</button>
+            <button id="coin100">100원</button>
+            <button id="coin500">500원</button>
+            투입한 금액 : <input id="inMoney" size="5" type="text"  readonly value="0">
+        </div>
+        <!-- 판매금액 출력 -->
+         <div>
+            <h2>판매금액</h2>
+            <p id="vmMoney"></p>
+         </div>
+        <!-- 커피 배출구 -->
+        <div id="coffeeOut">            
+        </div>
+    </div>
+</body>
+<script>
+    // const price = [300,300,200];
+    const coffeePrice = {
+        "밀크커피":300,
+        "프림커피":300,
+        "블랙커피":200
+    }
+    // price["밀크커피"]
+
+    // 자판 동전
+    let vmMoney=0;  // 자판기 판매한 금액
+    let inMoney=0;  // 사용자가 입력한 동전
+
+    let $inMoney = document.querySelector("#inMoney");
+
+    let milkBtn = document.querySelector("#milk");
+    let blackBtn = document.querySelector("#black");
+    let creamBtn = document.querySelector("#cream");
+    
+    let milkPrice = document.querySelector("#milkPrice").innerHTML;
+    let creamPrice = document.querySelector("#creamPrice").innerHTML;
+    let blackPrice = document.querySelector("#blackPrice").innerHTML;
+
+    let pMilk = document.querySelector("#pMilk").innerHTML;
+    let pCream = document.querySelector("#pCream").innerHTML;
+    let pBlack = document.querySelector("#pBlack").innerHTML;
+
+    let coffeeOut = document.querySelector("#coffeeOut");
+
+    const coin50 = document.querySelector("#coin50");
+    const coin100 = document.querySelector("#coin100");
+    const coin500 = document.querySelector("#coin500");
+    console.log(coin500.innerHTML);
+
+    coin50.addEventListener("click",coinProc);
+    coin100.addEventListener("click",coinProc);
+    coin500.addEventListener("click",coinProc);
+
+    milkBtn.addEventListener("click",milkProc);
+    creamBtn.addEventListener("click",creamProc);
+    blackBtn.addEventListener("click",blackProc);
+
+    // 동전입력 처리
+    function coinProc(event){
+        let coin = event.target.innerHTML;
+        coin = parseInt(coin);
+        inMoney += coin;
+        $inMoney.value = inMoney;
+    }
+
+    function milkProc(event){
+        let product = event.target.innerHTML;
+        console.log(product);
+        let price=0;
+        price = coffeePrice[product];
+        vmMoney += price;
+
+        console.log("판매금액 :" +vmMoney);
+        coffeeOut.innerHTML = `<p><b> ${milkPrice} ${pMilk} 나왔습니다.</b></p>`;
+    }
+
+    function creamProc(event){
+        coffeeOut.innerHTML = `<p><b> ${creamPrice} ${pCream} 나왔습니다.</b></p>`;
+    }
+
+    function blackProc(event){
+        coffeeOut.innerHTML = `<p><b> ${blackPrice} ${pBlack} 나왔습니다.</b></p>`;
+    }
+
+</script>
+</html>
