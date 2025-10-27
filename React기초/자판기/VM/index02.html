@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,7 @@
             border-radius: 20px;
         }
 
-        #coffeeOut {
+        #coffeeOutBox {
             width: 100px;
             height: 120px;
             margin: 30px auto;
@@ -29,6 +30,7 @@
             background-color: #56535370;
             padding: 10px;
             border-radius: 20px;
+            display: inline-block;
         }
 
         .products {
@@ -39,8 +41,20 @@
         #inMoney {
             text-align: right;
         }
+
+        #coinOutBox {
+            width: 100px;
+            height: 120px;
+            margin: 30px auto;
+            border: 10px solid #953939;
+            display: inline-block;
+            margin-right: 2em;
+            border: 10px solid #ccc;
+            border-radius: 20px;
+        }
     </style>
 </head>
+
 <body>
     <div id="container">
         <!-- 커피 상품 나열 -->
@@ -68,37 +82,47 @@
             <button id="coin50">50원</button>
             <button id="coin100">100원</button>
             <button id="coin500">500원</button>
-            투입한 금액 : <input id="inMoney" size="5" type="text"  readonly value="0">
+            투입한 금액 : <input id="inMoney" size="5" type="text" readonly value="0">
+            <button id="returnCoin">잔돈반환</button>
+        
         </div>
         <!-- 판매금액 출력 -->
-         <div>
+        <div>
             <h2>판매금액</h2>
             <p id="vmMoney"></p>
-         </div>
+        </div>
         <!-- 커피 배출구 -->
-        <div id="coffeeOut">            
+        <div id="coffeeOutBox">
+            <button onclick="outCoffee()">꺼내기</button>
+            <p id="coffeeOut"></p>
+        </div>
+
+        <!-- 동전반환 출구 -->
+        <div id="coinOutBox">
+            <p id="coinOut"></p>
         </div>
     </div>
 </body>
 <script>
     // const price = [300,300,200];
     const coffeePrice = {
-        "밀크커피":300,
-        "프림커피":300,
-        "블랙커피":200
+        "밀크커피": 300,
+        "프림커피": 300,
+        "블랙커피": 200
     }
     // price["밀크커피"]
 
     // 자판 동전
-    let vmMoney=0;  // 자판기 판매한 금액
-    let inMoney=0;  // 사용자가 입력한 동전
+    let vmMoney = 0;  // 자판기 판매한 금액
+    let inMoney = 0;  // 사용자가 입력한 동전
 
     let $inMoney = document.querySelector("#inMoney");
+    let $returnCoin = document.querySelector("#returnCoin");
 
     let milkBtn = document.querySelector("#milk");
     let blackBtn = document.querySelector("#black");
     let creamBtn = document.querySelector("#cream");
-    
+
     let milkPrice = document.querySelector("#milkPrice").innerHTML;
     let creamPrice = document.querySelector("#creamPrice").innerHTML;
     let blackPrice = document.querySelector("#blackPrice").innerHTML;
@@ -115,62 +139,91 @@
 
     const $vmMoney = document.querySelector("#vmMoney");
 
-    coin50.addEventListener("click",coinProc);
-    coin100.addEventListener("click",coinProc);
-    coin500.addEventListener("click",coinProc);
+    coin50.addEventListener("click", coinProc);
+    coin100.addEventListener("click", coinProc);
+    coin500.addEventListener("click", coinProc);
 
-    milkBtn.addEventListener("click",milkProc);
-    creamBtn.addEventListener("click",creamProc);
-    blackBtn.addEventListener("click",blackProc);
+    milkBtn.addEventListener("click", milkProc);
+    creamBtn.addEventListener("click", creamProc);
+    blackBtn.addEventListener("click", blackProc);    
 
     // 동전입력 처리
-    function coinProc(event){
+    function coinProc(event) {
         let coin = event.target.innerHTML;
         coin = parseInt(coin);
         inMoney += coin;
         $inMoney.value = inMoney;
 
         // 커피버튼 활성화
-        if(inMoney >= 300){
+        //  버튼 활성화/비활성화 함수 변환
+        checkButton();
+    }
+
+    function checkButton() {
+        // 버튼을 초기화(꺼진상태로 설정)
+        milkBtn.disabled = true;
+        creamBtn.disabled = true;
+        blackBtn.disabled = true;
+
+        if (inMoney >= 300) {
             milkBtn.disabled = false;
             creamBtn.disabled = false;
             blackBtn.disabled = false;
-        }else if(inMoney >= 200){
+        } else if (inMoney >= 200) {
             blackBtn.disabled = false;
-            console.log("--->")            
         }
     }
 
-    function vmMoneyProc(event){
+    function vmMoneyProc(event) {
         let product = event.target.innerHTML;
-        let price=0;
+        let price = 0;
         price = coffeePrice[product];
         vmMoney += price;
         inMoney -= price;
         return vmMoney;
     }
 
-    function milkProc(event){
+    function milkProc(event) {
         let vmMoney = vmMoneyProc(event);
 
-        console.log("판매금액 :" +vmMoney);
+        console.log("판매금액 :" + vmMoney);
         coffeeOut.innerHTML = `<p><b> ${milkPrice} ${pMilk} 나왔습니다.</b></p>`;
-        $vmMoney.innerHTML = vmMoney;
-    }    
 
-    function creamProc(event){
+        $vmMoney.innerHTML = vmMoney;
+        $inMoney.value = inMoney;
+        checkButton();
+    }
+
+    function creamProc(event) {
         let vmMoney = vmMoneyProc(event);
 
         coffeeOut.innerHTML = `<p><b> ${creamPrice} ${pCream} 나왔습니다.</b></p>`;
         $vmMoney.innerHTML = vmMoney;
+        $inMoney.value = inMoney;
+        checkButton();
     }
 
-    function blackProc(event){
+    function blackProc(event) {
         let vmMoney = vmMoneyProc(event);
 
         coffeeOut.innerHTML = `<p><b> ${blackPrice} ${pBlack} 나왔습니다.</b></p>`;
         $vmMoney.innerHTML = vmMoney;
+        $inMoney.value = inMoney;
+        checkButton();
+    }
+
+    $returnCoin.addEventListener("click",()=>{        
+            document.querySelector("#coinOut").innerHTML = inMoney;
+            document.querySelector("#inMoney").value = "0";
+            inMoney = 0;
+            checkButton();
+    });
+
+    function outCoffee(){
+        document.querySelector("#coffeeOut").innerHTML = "커피를 꺼냈습니다.";
+        let iscoffeeOut = true;
     }
 
 </script>
+
 </html>
