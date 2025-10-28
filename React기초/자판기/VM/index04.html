@@ -67,10 +67,10 @@
                     <button id="milk" disabled>밀크커피</button>
                 </li>
                 <li class="products">
-                    <img src="img/sugarOut.png" alt="설탕이미지"/>
-                    <p id="pSugar">설탕커피</p>
-                    <p>가격:<span id="sugarPrice">500</span>원</p>
-                    <button id="sugar" disabled>설탕커피</button>
+                    <img src="img/sugarOut.png" alt="밀크이미지"/>
+                    <p id="pCream">설탕커피</p>
+                    <p>가격:<span id="creamPrice">300</span>원</p>
+                    <button id="cream" disabled>설탕커피</button>
                 </li>
                 <li class="products">
                     <img src="img/blackOut.png" alt="밀크이미지"/>
@@ -107,27 +107,16 @@
     </div>
 </body>
 <script>
-
     // const price = [300,300,200];
     const coffeePrice = {
         "밀크커피": 300,
-        "설탕커피": 500,
+        "프림커피": 300,
         "블랙커피": 200
     }
     // price["밀크커피"]
 
-    const MLIK_PRICE = coffeePrice["밀크커피"];
-    const SUGAR_PRICE = coffeePrice["설탕커피"];
-    const BLACK_PRICE = coffeePrice["블랙커피"];
-    
     // 자판 동전
-    let vmMoney = 0;
-
-    if(loadVMmoney()){
-        vmMoney = loadVMmoney(); 
-    }
-
-    //let vmMoney = loadVMmoney();  // 자판기 판매한 금액
+    let vmMoney = 0;  // 자판기 판매한 금액
     let inMoney = 0;  // 사용자가 입력한 동전
 
     let $inMoney = document.querySelector("#inMoney");
@@ -135,14 +124,14 @@
 
     let milkBtn = document.querySelector("#milk");
     let blackBtn = document.querySelector("#black");
-    let sugarBtn = document.querySelector("#sugar");
+    let creamBtn = document.querySelector("#cream");
 
     let milkPrice = document.querySelector("#milkPrice").innerHTML;
-    let sugarPrice = document.querySelector("#sugarPrice").innerHTML;
+    let creamPrice = document.querySelector("#creamPrice").innerHTML;
     let blackPrice = document.querySelector("#blackPrice").innerHTML;
 
     let pMilk = document.querySelector("#pMilk").innerHTML;
-    let pSugar = document.querySelector("#pSugar").innerHTML;
+    let pCream = document.querySelector("#pCream").innerHTML;
     let pBlack = document.querySelector("#pBlack").innerHTML;
 
     let coffeeOut = document.querySelector("#coffeeOut");
@@ -158,7 +147,7 @@
     coin500.addEventListener("click", coinProc);
 
     milkBtn.addEventListener("click", milkProc);
-    sugarBtn.addEventListener("click", sugarProc);
+    creamBtn.addEventListener("click", creamProc);
     blackBtn.addEventListener("click", blackProc);    
 
     // 동전입력 처리
@@ -176,17 +165,14 @@
     function checkButton() {
         // 버튼을 초기화(꺼진상태로 설정)
         milkBtn.disabled = true;
-        sugarBtn.disabled = true;
+        creamBtn.disabled = true;
         blackBtn.disabled = true;
 
-        if (inMoney >= SUGAR_PRICE) {
+        if (inMoney >= 300) {
             milkBtn.disabled = false;
-            sugarBtn.disabled = false;
+            creamBtn.disabled = false;
             blackBtn.disabled = false;
-        } else if (inMoney >= MLIK_PRICE) {
-            milkBtn.disabled = false;        
-            blackBtn.disabled = false;
-        } else if (inMoney >= BLACK_PRICE) {
+        } else if (inMoney >= 200) {
             blackBtn.disabled = false;
         }
     }
@@ -203,35 +189,30 @@
     function milkProc(event) {
         let vmMoney = vmMoneyProc(event);
 
-        console.log("판매금액 :" + vmMoney);        
-        //coffeeOut.innerHTML = `<p><b> ${milkPrice} ${pMilk} 나왔습니다.</b></p>`;
-        coffeeOut.innerHTML = `<img src="img/milkOut.png" />`;
+        console.log("판매금액 :" + vmMoney);
+        coffeeOut.innerHTML = `<p><b> ${milkPrice} ${pMilk} 나왔습니다.</b></p>`;
 
         $vmMoney.innerHTML = vmMoney;
         $inMoney.value = inMoney;
         checkButton();
-        saveVMmoney();
     }
 
-    function sugarProc(event) {
+    function creamProc(event) {
         let vmMoney = vmMoneyProc(event);
 
-        //coffeeOut.innerHTML = `<p><b> ${sugarPrice} ${pSugar} 나왔습니다.</b></p>`;
-        coffeeOut.innerHTML = `<img src="img/sugarOut.png" />`;
+        coffeeOut.innerHTML = `<p><b> ${creamPrice} ${pCream} 나왔습니다.</b></p>`;
         $vmMoney.innerHTML = vmMoney;
         $inMoney.value = inMoney;
         checkButton();
-        saveVMmoney();
     }
 
     function blackProc(event) {
         let vmMoney = vmMoneyProc(event);
-        //coffeeOut.innerHTML = `<p><b> ${blackPrice} ${pBlack} 나왔습니다.</b></p>`;
-        coffeeOut.innerHTML = `<img src="img/blackOut.png" />`;
+
+        coffeeOut.innerHTML = `<p><b> ${blackPrice} ${pBlack} 나왔습니다.</b></p>`;
         $vmMoney.innerHTML = vmMoney;
         $inMoney.value = inMoney;
         checkButton();
-        saveVMmoney();
     }
 
     $returnCoin.addEventListener("click",()=>{        
@@ -245,22 +226,6 @@
         document.querySelector("#coffeeOut").innerHTML = "커피를 꺼냈습니다.";
         let iscoffeeOut = true;
     }
-
-    // 자판기 판매금액 저장
-    //window.localStorage.setItem('name', 'anna');
-    //window.localStorage.setItem('age', '20'); 
-    // getItemconst name = window.localStorage.getItem('name');
-    // const age = window.localStorage.getItem('age');
-    function saveVMmoney(){
-        window.localStorage.setItem('money', vmMoney);
-    }
-
-    function loadVMmoney(){
-        vmMoney = window.localStorage.getItem('money');
-        vmMoney = parseInt(vmMoney);
-    }
-
-
 
 </script>
 
