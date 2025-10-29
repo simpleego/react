@@ -221,13 +221,13 @@
     sugarBtn.addEventListener("click", sugarProc);
     blackBtn.addEventListener("click", blackProc);
 
-    // coffeePrice["캔커피"] = 700;
-    // coffeePrice["캔사이다"] = 600;
-    // coffeePrice["캔콜라"] = 650;
+    coffeePrice["캔커피"] = 700;
+    coffeePrice["캔사이다"] = 600;
+    coffeePrice["캔콜라"] = 650;
 
-    // const CANCOFFEE_PRICE = coffeePrice["캔커피"];
-    // const CIDER_PRICE = coffeePrice["캔사이다"];
-    // const COLA_PRICE = coffeePrice["캔콜라"];
+    const CANCOFFEE_PRICE = coffeePrice["캔커피"];
+    const CIDER_PRICE = coffeePrice["캔사이다"];
+    const COLA_PRICE = coffeePrice["캔콜라"];
 
     let canCoffeeBtn = document.querySelector("#canCoffee");
     let ciderBtn = document.querySelector("#cider");
@@ -255,7 +255,6 @@
         milkBtn.disabled = true;
         sugarBtn.disabled = true;
         blackBtn.disabled = true;
-        
         ciderBtn.disabled = true;
         colaBtn.disabled = true;
         canCoffeeBtn.disabled = true;
