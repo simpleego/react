@@ -1,0 +1,5 @@
+.main {
+    padding: 2rem;
+    min-height: calc(100vh - 120px);
+    /* 헤더와 풋터의 높이를 제외한 나머지 공간*/
+}
